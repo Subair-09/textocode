@@ -164,8 +164,8 @@ const Hero = () => {
           <h1 className="text-5xl md:text-7xl font-extrabold text-gray-900 dark:text-white mb-8 leading-[1.1] tracking-tight max-w-4xl mx-auto">
             Learn AI-Powered Coding — Build Real Applications from <span className="text-purple-600 dark:text-purple-400">Scratch to Deployment</span>
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-400 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Learn using free AI tools, master prompt engineering, and build real-world apps. We don’t just teach coding — we teach how to think, build, and deploy.
+          <p className="text-xl text-gray-600 dark:text-gray-400 mb-10 max-w-3xl mx-auto leading-relaxed">
+            Learn using free AI tools, master prompt engineering, and build real-world apps. We teach you how to think, build, and <strong>deploy to your own custom domain on Hostinger.</strong>
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
             <button className="bg-purple-600 text-white px-8 py-4 rounded-full text-lg font-bold hover:bg-purple-700 transition-all shadow-lg hover:shadow-purple-200 dark:hover:shadow-purple-900/30 flex items-center gap-2 group">
@@ -248,8 +248,8 @@ const LearningApproach = () => {
       icon: <Github className="w-6 h-6" />
     },
     { 
-      title: "Deploy applications with Vercel", 
-      desc: "Take your project from localhost to the live web with seamless CI/CD.",
+      title: "Go Live on Your Own Domain", 
+      desc: "Take your project live on your own custom domain using Hostinger, Vercel, or Netlify.",
       icon: <Rocket className="w-6 h-6" />
     },
   ];
@@ -429,7 +429,7 @@ const WhatYouWillLearn = () => {
     { title: "Full-Stack Dev", desc: "Build both frontend and backend for scalable systems.", icon: <Layers /> },
     { title: "Auth Systems", desc: "Implement secure login and user management patterns.", icon: <ShieldCheck /> },
     { title: "Databases", desc: "Design and integrate modern NoSQL and SQL databases.", icon: <Database /> },
-    { title: "Cloud Hosting", desc: "Master CI/CD pipelines and production hosting.", icon: <Globe2 /> },
+    { title: "Cloud & Custom Domains", desc: "Deploy your apps live to your own custom domain using Hostinger and modern cloud platforms.", icon: <Globe2 /> },
   ];
 
   return (
@@ -768,7 +768,7 @@ const UniqueValue = () => {
 
 const Outcomes = () => {
   const outcomes = [
-    { title: "Live Portfolio", desc: "A collection of 3-5 high-quality, fully deployed full-stack apps." },
+    { title: "Live Portfolio", desc: "A collection of 3-5 high-quality apps deployed to your own custom domain on Hostinger." },
     { title: "Technical Skills", desc: "Deep expertise in React, Node.js, and AI automation tools." },
     { title: "Job Ready", desc: "Confidence to interview for global roles with a solid proof of work." },
     { title: "Freelance Mastery", desc: "Skills to ship products independently for clients worldwide." },
