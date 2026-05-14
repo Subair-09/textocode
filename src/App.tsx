@@ -33,6 +33,8 @@ import {
   Clock,
   TrendingUp,
   Gamepad2,
+  PenTool,
+  Box,
   UserPlus
 } from "lucide-react";
 
@@ -223,18 +225,18 @@ const GlobalPresence = () => {
 const LearningApproach = () => {
   const steps = [
     { 
-      title: "Real-world problem solving", 
-      desc: "Learn to break down complex problems into manageable technical requirements.",
-      icon: <Terminal className="w-6 h-6" />
+      title: "System Thinking & Design", 
+      desc: "We start with system thinking and design, breaking down complex ideas into architectural blueprints.",
+      icon: <Box className="w-6 h-6" />
     },
     { 
-      title: "System analysis and design", 
-      desc: "Master the art of planning before coding — architecture, data flow, and UI patterns.",
-      icon: <Layers className="w-6 h-6" />
+      title: "UML & Use Case Diagrams", 
+      desc: "Visualize systems using Unified Modeling Language (UML) to define logic and interactions before using AI tools to code.",
+      icon: <PenTool className="w-6 h-6" />
     },
     { 
-      title: "AI-assisted coding (Vibe Coding)", 
-      desc: "Use cutting-edge AI tools to accelerate development and focus on logic.",
+      title: "AI-assisted coding", 
+      desc: "Leverage free AI tools to accelerate development while maintaining full control over the system design.",
       icon: <Cpu className="w-6 h-6" />
     },
     { 
@@ -424,6 +426,7 @@ const PortfolioSection = () => {
 
 const WhatYouWillLearn = () => {
   const topics = [
+    { title: "System Design & UML", desc: "Master system thinking and visualize logic with UML and Use Case diagrams.", icon: <Box /> },
     { title: "Prompt Engineering", desc: "Advanced techniques for high-quality code generation.", icon: <Zap /> },
     { title: "AI Workflows", desc: "Integrate AI tools into your daily professional coding cycle.", icon: <Cpu /> },
     { title: "Full-Stack Dev", desc: "Build both frontend and backend for scalable systems.", icon: <Layers /> },
