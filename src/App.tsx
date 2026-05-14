@@ -77,26 +77,35 @@ const Navbar = ({ isDarkMode, toggleDarkMode }: { isDarkMode: boolean, toggleDar
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <a 
+            <motion.a 
               key={link.name} 
               href={link.href} 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               className="text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
             >
               {link.name}
-            </a>
+            </motion.a>
           ))}
           
           <div className="flex items-center gap-4">
-            <button 
+            <motion.button 
+              whileHover={{ rotate: 180 }}
+              transition={{ duration: 0.5 }}
               onClick={toggleDarkMode}
-              className="p-2 rounded-full bg-gray-100 dark:bg-zinc-800 text-gray-600 dark:text-gray-400 hover:text-purple-600 transition-all"
+              className="p-2 rounded-full bg-gray-100 dark:bg-zinc-800 text-gray-600 dark:text-gray-400 hover:text-purple-600 transition-all border border-transparent hover:border-purple-200 dark:hover:border-purple-800"
               aria-label="Toggle Dark Mode"
             >
               {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-            </button>
-            <button className="bg-purple-600 text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-purple-700 transition-all shadow-sm">
+            </motion.button>
+            <motion.a 
+              href="#contact" 
+              whileHover={{ scale: 1.05, boxShadow: "0 10px 15px -3px rgba(147, 51, 234, 0.3)" }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-purple-600 text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-purple-700 transition-all shadow-sm"
+            >
               Join Textocode Academy
-            </button>
+            </motion.a>
           </div>
         </div>
 
@@ -136,9 +145,13 @@ const Navbar = ({ isDarkMode, toggleDarkMode }: { isDarkMode: boolean, toggleDar
                 {link.name}
               </a>
             ))}
-            <button className="bg-purple-600 text-white w-full py-4 rounded-xl text-lg font-bold">
+            <a 
+              href="#contact"
+              className="bg-purple-600 text-white w-full py-4 rounded-xl text-lg font-bold text-center"
+              onClick={() => setIsOpen(false)}
+            >
               Join Textocode Academy
-            </button>
+            </a>
           </motion.div>
         )}
       </AnimatePresence>
@@ -149,9 +162,26 @@ const Navbar = ({ isDarkMode, toggleDarkMode }: { isDarkMode: boolean, toggleDar
 const Hero = () => {
   return (
     <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden bg-white dark:bg-black transition-colors duration-300">
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-purple-50 dark:bg-purple-900/10 rounded-full blur-3xl opacity-50" />
-        <div className="absolute bottom-[-10%] left-[-10%] w-[30%] h-[30%] bg-indigo-50 dark:bg-indigo-900/10 rounded-full blur-3xl opacity-30" />
+      <div className="absolute inset-0 -z-10 overflow-hidden">
+        <motion.div 
+          animate={{ 
+            scale: [1, 1.1, 1],
+            rotate: [0, 5, 0],
+            x: [0, 20, 0],
+            y: [0, -20, 0]
+          }}
+          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+          className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-purple-50 dark:bg-purple-900/10 rounded-full blur-3xl opacity-50" 
+        />
+        <motion.div 
+          animate={{ 
+            scale: [1, 1.2, 1],
+            x: [0, -30, 0],
+            y: [0, 40, 0]
+          }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          className="absolute bottom-[-10%] left-[-10%] w-[30%] h-[30%] bg-indigo-50 dark:bg-indigo-900/10 rounded-full blur-3xl opacity-30" 
+        />
       </div>
 
       <div className="max-w-7xl mx-auto px-6 text-center">
@@ -170,12 +200,12 @@ const Hero = () => {
             Learn using free AI tools, master prompt engineering, and build real-world apps. We teach you how to think, build, and <strong>deploy to your own custom domain on Hostinger.</strong>
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-            <button className="bg-purple-600 text-white px-8 py-4 rounded-full text-lg font-bold hover:bg-purple-700 transition-all shadow-lg hover:shadow-purple-200 dark:hover:shadow-purple-900/30 flex items-center gap-2 group">
+            <a href="#contact" className="bg-purple-600 text-white px-8 py-4 rounded-full text-lg font-bold hover:bg-purple-700 transition-all shadow-lg hover:shadow-purple-200 dark:hover:shadow-purple-900/30 flex items-center gap-2 group">
               Join Textocode Academy <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </button>
-            <button className="bg-white dark:bg-zinc-900 text-gray-900 dark:text-white border border-gray-200 dark:border-zinc-800 px-8 py-4 rounded-full text-lg font-bold hover:bg-gray-50 dark:hover:bg-zinc-800 transition-all">
+            </a>
+            <a href="#curriculum" className="bg-white dark:bg-zinc-900 text-gray-900 dark:text-white border border-gray-200 dark:border-zinc-800 px-8 py-4 rounded-full text-lg font-bold hover:bg-gray-50 dark:hover:bg-zinc-800 transition-all">
               Get Started
-            </button>
+            </a>
           </div>
           <div className="flex items-center justify-center gap-3">
             <div className="flex -space-x-2">
@@ -202,18 +232,34 @@ const GlobalPresence = () => {
     <section id="global" className="py-20 bg-gray-50/50 dark:bg-zinc-900/30 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-col md:flex-row items-center justify-between gap-12">
-          <div className="max-w-md">
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="max-w-md"
+          >
             <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-6">We train globally competitive developers</h2>
             <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
               Our graduates are building the future across the globe. From major tech hubs to emerging digital markets, we bridge the gap between education and industry.
             </p>
-          </div>
+          </motion.div>
           <div className="flex-1 grid grid-cols-2 md:grid-cols-3 gap-4">
-            {regions.map((region) => (
-              <div key={region} className="bg-white dark:bg-zinc-900 p-6 rounded-2xl border border-gray-100 dark:border-zinc-800 shadow-sm flex items-center gap-3 hover:border-purple-200 dark:hover:border-purple-900 hover:bg-purple-50/10 transition-colors group">
-                <Globe2 className="text-gray-400 dark:text-gray-600 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors" />
+            {regions.map((region, idx) => (
+              <motion.div 
+                key={region}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
+                whileHover={{ y: -5, backgroundColor: "rgba(147, 51, 234, 0.05)" }}
+                className="bg-white dark:bg-zinc-900 p-6 rounded-2xl border border-gray-100 dark:border-zinc-800 shadow-sm flex items-center gap-3 hover:border-purple-200 dark:hover:border-purple-900 transition-all group"
+              >
+                <div className="group-hover:rotate-12 transition-transform">
+                  <Globe2 className="text-gray-400 dark:text-gray-600 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors" />
+                </div>
                 <span className="font-bold text-gray-800 dark:text-gray-200 italic">{region}</span>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -259,23 +305,35 @@ const LearningApproach = () => {
   return (
     <section id="approach" className="py-24 bg-white dark:bg-black transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-16">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">How We Learn</h2>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
             A structured flow designed to take you from a curious beginner to a professional full-stack developer.
           </p>
-        </div>
+        </motion.div>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {steps.map((step, idx) => (
             <motion.div 
               key={step.title}
-              whileHover={{ y: -5 }}
-              className="p-8 rounded-3xl bg-white dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 shadow-sm hover:shadow-xl hover:shadow-gray-100 dark:hover:shadow-zinc-950 transition-all"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.1 }}
+              whileHover={{ y: -10, scale: 1.02 }}
+              className="p-8 rounded-3xl bg-white dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 shadow-sm hover:shadow-2xl hover:shadow-purple-500/5 transition-all cursor-default"
             >
-              <div className="w-12 h-12 bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400 rounded-xl flex items-center justify-center mb-6">
+              <motion.div 
+                whileHover={{ rotate: 5, scale: 1.1 }}
+                className="w-12 h-12 bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400 rounded-xl flex items-center justify-center mb-6"
+              >
                 {step.icon}
-              </div>
+              </motion.div>
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">{step.title}</h3>
               <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-sm md:text-base">
                 {step.desc}
@@ -330,12 +388,17 @@ const WhoThisIsFor = () => {
   return (
     <section id="who-it-is-for" className="py-24 bg-gray-50 dark:bg-zinc-900/20 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-16">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">Who This Is For</h2>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
             This AI Coding Bootcamp is designed for anyone who wants to build real tech skills without wasting years learning theory.
           </p>
-        </div>
+        </motion.div>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {categories.map((cat, idx) => (
@@ -345,9 +408,10 @@ const WhoThisIsFor = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1 }}
-              className="p-8 rounded-[2.5rem] bg-white dark:bg-black border border-gray-100 dark:border-zinc-800 hover:border-purple-200 dark:hover:border-purple-900 transition-all group"
+              whileHover={{ y: -5, scale: 1.02 }}
+              className="p-8 rounded-[2.5rem] bg-white dark:bg-black border border-gray-100 dark:border-zinc-800 hover:border-purple-200 dark:hover:border-purple-900 transition-all group shadow-sm hover:shadow-xl hover:shadow-purple-500/10"
             >
-              <div className="w-14 h-14 bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <div className="w-14 h-14 bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-transform">
                 {cat.icon}
               </div>
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 leading-tight">{cat.title}</h3>
@@ -368,7 +432,12 @@ const PortfolioSection = () => {
       <div className="absolute top-0 right-0 w-[50%] h-full bg-purple-800/10 dark:bg-purple-900/5 skew-x-12 translate-x-32" />
       
       <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
-        <div>
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
           <span className="text-purple-400 font-bold tracking-widest uppercase text-sm mb-4 block underline-offset-8 underline decoration-purple-500/30">
             Key Differentiator
           </span>
@@ -381,24 +450,43 @@ const PortfolioSection = () => {
               "Each student builds a unique personal portfolio",
               "All applications are deployed live to production",
               "Finish with artifacts you can showcase to employers"
-            ].map((item) => (
-              <li key={item} className="flex gap-4 items-start">
+            ].map((item, idx) => (
+              <motion.li 
+                key={item} 
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 + idx * 0.1 }}
+                className="flex gap-4 items-start"
+              >
                 <div className="mt-1 w-6 h-6 rounded-full bg-purple-500/20 flex items-center justify-center shrink-0">
                   <CheckCircle2 className="w-4 h-4 text-purple-400" />
                 </div>
                 <p className="text-lg text-purple-50/80">{item}</p>
-              </li>
+              </motion.li>
             ))}
           </ul>
-          <div className="p-8 bg-purple-900/40 dark:bg-black/40 rounded-3xl border border-purple-800/50 dark:border-zinc-800 backdrop-blur-sm">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.8 }}
+            className="p-8 bg-purple-900/40 dark:bg-black/40 rounded-3xl border border-purple-800/50 dark:border-zinc-800 backdrop-blur-sm"
+          >
             <p className="text-2xl font-bold leading-relaxed">
               "Graduate with live, deployed applications — <span className="text-purple-400">not just certificates</span>."
             </p>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
         
-        <div className="relative">
-          <div className="bg-white dark:bg-zinc-800 rounded-3xl overflow-hidden shadow-2xl shadow-purple-950 p-2 md:p-4 rotate-2">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.9, rotate: 5 }}
+          whileInView={{ opacity: 1, scale: 1, rotate: 2 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="relative"
+        >
+          <div className="bg-white dark:bg-zinc-800 rounded-3xl overflow-hidden shadow-2xl shadow-purple-950 p-2 md:p-4">
             <div className="bg-gray-50 dark:bg-black rounded-2xl overflow-hidden border border-gray-100 dark:border-zinc-800 aspect-[16/10] relative group">
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
                 <div className="flex justify-between w-full items-center">
@@ -409,16 +497,20 @@ const PortfolioSection = () => {
               <img 
                 src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80" 
                 alt="Project Example" 
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 referrerPolicy="no-referrer"
               />
             </div>
           </div>
-          <div className="absolute -bottom-10 -left-10 bg-purple-500 text-white p-6 rounded-3xl shadow-xl hidden md:block -rotate-3 border-4 border-purple-950">
+          <motion.div 
+            animate={{ y: [0, -10, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute -bottom-10 -left-10 bg-purple-500 text-white p-6 rounded-3xl shadow-xl hidden md:block -rotate-3 border-4 border-purple-950"
+          >
             <p className="font-bold text-xl">100% Deployed</p>
             <p className="text-purple-100 text-sm">Every project goes live</p>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );
@@ -438,24 +530,37 @@ const WhatYouWillLearn = () => {
   return (
     <section id="curriculum" className="py-24 bg-gray-50 dark:bg-zinc-900/30 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-16">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">What You Will Learn</h2>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
             Our curriculum is constantly updated to reflect the rapid pace of the AI era.
           </p>
-        </div>
+        </motion.div>
         
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {topics.map((topic) => (
-            <div key={topic.title} className="p-8 bg-white dark:bg-black rounded-3xl border border-gray-100 dark:border-zinc-800 flex gap-6 items-start hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400 rounded-2xl flex items-center justify-center shrink-0">
+          {topics.map((topic, idx) => (
+            <motion.div 
+              key={topic.title}
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.1 }}
+              whileHover={{ scale: 1.05 }}
+              className="p-8 bg-white dark:bg-black rounded-3xl border border-gray-100 dark:border-zinc-800 flex gap-6 items-start hover:shadow-2xl hover:shadow-purple-500/5 transition-all group"
+            >
+              <div className="w-12 h-12 bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400 rounded-2xl flex items-center justify-center shrink-0 group-hover:rotate-12 transition-transform">
                 {topic.icon}
               </div>
               <div>
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{topic.title}</h3>
                 <p className="text-gray-600 dark:text-gray-400 italic">{topic.desc}</p>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -469,16 +574,36 @@ const InstructorSection = () => {
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-col md:flex-row items-center gap-16">
           <div className="w-full md:w-1/2 relative">
-            <div className="relative z-10 rounded-[2rem] overflow-hidden border-8 border-white dark:border-zinc-800 shadow-2xl">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9, rotate: -5 }}
+              whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="relative z-10 rounded-[2rem] overflow-hidden border-8 border-white dark:border-zinc-800 shadow-2xl"
+            >
               <img 
                 src="https://imgur.com/nCbQeFD.png" 
                 alt="Subair Nurudeen Adewale" 
                 className="w-full aspect-[4/5] object-cover"
                 referrerPolicy="no-referrer"
               />
-            </div>
-            <div className="absolute -top-6 -left-6 w-32 h-32 bg-purple-100 dark:bg-purple-900/20 rounded-full -z-10" />
-            <div className="absolute -bottom-10 -right-6 w-64 h-64 bg-purple-50 dark:bg-purple-900/10 rounded-full -z-10 opacity-50" />
+            </motion.div>
+            <motion.div 
+              animate={{ 
+                x: [0, 15, 0],
+                y: [0, -15, 0]
+              }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute -top-6 -left-6 w-32 h-32 bg-purple-100 dark:bg-purple-900/20 rounded-full -z-10" 
+            />
+            <motion.div 
+              animate={{ 
+                x: [0, -20, 0],
+                y: [0, 20, 0]
+              }}
+              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute -bottom-10 -right-6 w-64 h-64 bg-purple-50 dark:bg-purple-900/10 rounded-full -z-10 opacity-50" 
+            />
           </div>
           
           <div className="w-full md:w-1/2">
@@ -492,6 +617,9 @@ const InstructorSection = () => {
             <div className="space-y-4 text-lg text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
               <p>
                 Subair Nurudeen Adewale is a <strong>Cloud/DevOps Engineer and AI Specialist</strong> with a strong background in building scalable systems, training developers, and contributing to the tech ecosystem through media and education.
+              </p>
+              <p>
+                He holds a <strong>Diploma in Computer Science from Yaba College of Technology</strong> and is currently pursuing his <strong>BSc in Computer Science at the University of the People</strong> in Pasadena, California.
               </p>
               <p>
                 He is a <strong>Microsoft Certified Azure DevOps Expert</strong> and a <strong>Micro1 Certified AI Evaluation Specialist</strong>, with hands-on experience in cloud infrastructure, automation, and modern development workflows.
@@ -736,10 +864,22 @@ const UniqueValue = () => {
   return (
     <section className="py-24 bg-white dark:bg-black transition-colors duration-300 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="bg-purple-50 dark:bg-zinc-900 rounded-[3rem] p-12 md:p-20 relative border border-purple-100 dark:border-zinc-800">
-          <div className="absolute top-0 right-0 p-8">
-            <Code2 className="w-32 h-32 text-purple-200/50 dark:text-white/5" />
-          </div>
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="bg-purple-50 dark:bg-zinc-900 rounded-[3rem] p-12 md:p-20 relative border border-purple-100 dark:border-zinc-800 overflow-hidden"
+        >
+          <motion.div 
+            animate={{ 
+              rotate: [0, 10, 0],
+              scale: [1, 1.1, 1]
+            }}
+            transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+            className="absolute top-0 right-0 p-8"
+          >
+            <Code2 className="w-40 h-40 text-purple-200/50 dark:text-white/5" />
+          </motion.div>
           <div className="relative z-10 max-w-3xl">
             <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-8 leading-tight">
               We Don’t Teach Tutorials — <br />
@@ -749,21 +889,25 @@ const UniqueValue = () => {
               Students don’t just follow lessons — they design, build, and launch real applications. We simulate a true product development environment.
             </p>
             <div className="flex flex-wrap gap-8">
-              <div>
-                <p className="text-4xl font-bold text-purple-700 dark:text-purple-400 mb-1">0%</p>
-                <p className="text-gray-600 dark:text-gray-400 font-medium">Fake Projects</p>
-              </div>
-              <div>
-                <p className="text-4xl font-bold text-purple-700 dark:text-purple-400 mb-1">100%</p>
-                <p className="text-gray-600 dark:text-gray-400 font-medium">Real Deployment</p>
-              </div>
-              <div>
-                <p className="text-4xl font-bold text-purple-700 dark:text-purple-400 mb-1">24/7</p>
-                <p className="text-gray-600 dark:text-gray-400 font-medium">AI Support</p>
-              </div>
+              {[
+                { val: "0%", label: "Fake Projects" },
+                { val: "100%", label: "Real Deployment" },
+                { val: "24/7", label: "AI Support" }
+              ].map((stat, idx) => (
+                <motion.div 
+                  key={stat.label}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3 + idx * 0.1 }}
+                >
+                  <p className="text-4xl font-bold text-purple-700 dark:text-purple-400 mb-1">{stat.val}</p>
+                  <p className="text-gray-600 dark:text-gray-400 font-medium">{stat.label}</p>
+                </motion.div>
+              ))}
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -784,14 +928,24 @@ const Outcomes = () => {
           <h2 className="text-4xl font-bold text-gray-900 dark:text-white">Student Outcomes</h2>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {outcomes.map((item) => (
-            <div key={item.title} className="text-center group">
-              <div className="w-16 h-16 bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-purple-600 group-hover:text-white transition-all">
+          {outcomes.map((item, idx) => (
+            <motion.div 
+              key={item.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.1 }}
+              className="text-center group"
+            >
+              <motion.div 
+                whileHover={{ scale: 1.1, backgroundColor: "rgb(147, 51, 234)", color: "white" }}
+                className="w-16 h-16 bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400 rounded-full flex items-center justify-center mx-auto mb-6 transition-all shadow-sm"
+              >
                 <CheckCircle2 className="w-8 h-8" />
-              </div>
+              </motion.div>
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">{item.title}</h3>
               <p className="text-gray-600 dark:text-gray-400">{item.desc}</p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -817,12 +971,22 @@ const FinalCTA = () => {
             Join Textocode Academy today and shift from following tutorials to building the future with AI.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-10">
-            <button className="bg-white dark:bg-zinc-900 text-purple-700 dark:text-white w-full sm:w-auto px-10 py-5 rounded-full text-xl font-bold hover:bg-purple-50 transition-all shadow-xl">
+            <motion.a 
+              href="#contact" 
+              whileHover={{ scale: 1.05, y: -5 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-white dark:bg-zinc-900 text-purple-700 dark:text-white w-full sm:w-auto px-10 py-5 rounded-full text-xl font-bold hover:bg-purple-50 transition-all shadow-xl"
+            >
               Join Textocode Academy
-            </button>
-            <button className="bg-purple-700 text-white w-full sm:w-auto px-10 py-5 rounded-full text-xl font-bold hover:bg-purple-800 transition-all">
+            </motion.a>
+            <motion.a 
+              href="#contact" 
+              whileHover={{ scale: 1.05, y: -5 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-purple-700 text-white w-full sm:w-auto px-10 py-5 rounded-full text-xl font-bold hover:bg-purple-800 transition-all shadow-lg"
+            >
               Start Building
-            </button>
+            </motion.a>
           </div>
         </motion.div>
       </div>
